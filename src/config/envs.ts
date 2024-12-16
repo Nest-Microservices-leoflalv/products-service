@@ -3,7 +3,7 @@ import { z } from 'zod';
 
 const envSchema = z
   .object({
-    PORT: z.string(),
+    PORT: z.preprocess((val) => Number(val), z.number().int().positive()),
     DATABASE_URL: z.string(),
   })
   .passthrough();
