@@ -5,6 +5,10 @@ const envSchema = z
   .object({
     PORT: z.preprocess((val) => Number(val), z.number().int().positive()),
     DATABASE_URL: z.string(),
+    NATS_SERVERS: z.preprocess(
+      (val: string) => val.split(','),
+      z.array(z.string()),
+    ),
   })
   .passthrough();
 
